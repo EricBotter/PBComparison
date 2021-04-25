@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
 
 namespace PBComparison.FFmpeg
 {
@@ -17,19 +18,32 @@ namespace PBComparison.FFmpeg
                 {
                     FileName = "ffmpeg.exe",
                     Arguments = options.Render(),
-                    WindowStyle = ProcessWindowStyle.Hidden,
                     UseShellExecute = false,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     CreateNoWindow = true,
                 }
             };
 
+            Console.WriteLine("ffmpeg.exe " + options.Render());
+
             process.Start();
 
-            Console.WriteLine(process.StandardError.ReadToEnd());
+            using (StreamReader myOutput = process.StandardError)
+            {
+                while (!process.HasExited)
+                {
+                    Console.WriteLine(myOutput.ReadLine());
+                }
+                Console.WriteLine(myOutput.ReadToEnd());
+            }
 
-            process.WaitForExit();// Waits here for the process to exit.
+            Console.WriteLine(process.StandardOutput.ReadToEnd()); // should be empty
+
+            process.WaitForExit();
+            process.Close();
         }
     }
 }

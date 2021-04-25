@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PBComparison
 {
-    class InputFile : IFFmpegOptionable
+    class InputFile : IFFmpegOption
     {
         public string Filename { get; init; }
 

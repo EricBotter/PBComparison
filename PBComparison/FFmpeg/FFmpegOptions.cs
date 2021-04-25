@@ -4,11 +4,26 @@ namespace PBComparison.FFmpeg
 {
     class FFmpegOptions
     {
-        public List<IFFmpegOptionable> Options { get; }
+        public List<IFFmpegOption> Options { get; }
 
-        public FFmpegOptions(List<IFFmpegOptionable> options)
+        public FFmpegOptions()
+        {
+            Options = new List<IFFmpegOption>();
+        }
+
+        public FFmpegOptions(List<IFFmpegOption> options)
         {
             Options = options;
+        }
+
+        public void Add(params IFFmpegOption[] option)
+        {
+            Options.AddRange(option);
+        }
+
+        public void Add(string option)
+        {
+            Options.Add(new FFmpegOption(option));
         }
 
         public string Render()

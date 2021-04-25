@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PBComparison
 {
-    interface IFFmpegOptionable
+    interface IFFmpegOption
     {
         string ToFFmpegOption();
     }

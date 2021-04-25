@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PBComparison
 {
-    class Clip : IFFmpegOptionable
+    class Clip : IFFmpegOption
     {
         public string Begin { get; init; }
         public string Duration { get; init; }

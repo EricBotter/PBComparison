@@ -1,6 +1,6 @@
 ﻿namespace PBComparison
 {
-    class OutputFile: IFFmpegOptionable
+    class OutputFile: IFFmpegOption
     {
         public string Filename { get; init; }
 

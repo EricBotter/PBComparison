@@ -10,11 +10,7 @@ namespace PBComparison.FFmpeg
         public FFmpegOptions()
         {
             Options = new List<IFFmpegOption>();
-        }
-
-        public FFmpegOptions(List<IFFmpegOption> options)
-        {
-            Options = options;
+            Add("-y");
         }
 
         public void Add(params IFFmpegOption[] option)

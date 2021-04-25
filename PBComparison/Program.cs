@@ -8,11 +8,12 @@ namespace PBComparison
         {
             InputFile inputFile = new() { Filename = "Z:/tmp/xem.mp4" };
             OutputFile outputFile = new() { Filename = "Z:/tmp/out.mp4" };
-            Clip clip = new() { Begin = "1", Duration = "1" };
+            Clip clip = new() { Begin = "0", Duration = "1" };
             Filter drawtext = new()
-            { 
+            {
                 Name = "drawtext",
-                Arguments = new() {
+                Arguments = new()
+                {
                     { "text", "sas" },
                     { "fontfile", "C:/Windows/fonts/Arial.ttf" },
                     { "fontcolor", "white" },
@@ -20,8 +21,25 @@ namespace PBComparison
                     { "x", "(w-text_w)/2" },
                     { "y", "(h-text_h)/2" },
                 },
-                Input = "color",
+                Input = "a1",
                 Output = "a"
+            };
+
+            Filter frameCounter = new()
+            {
+                Name = "drawtext",
+                Arguments = new()
+                {
+                    { "text", "%{frame_num}" },
+                    { "fontfile", "C:/Windows/fonts/Arial.ttf" },
+                    { "fontcolor", "white" },
+                    { "fontsize", "72" },
+                    { "x", "(w-text_w)/2+w/4" },
+                    { "y", "(h-text_h)/2-200" },
+                    { "start_number", "0" },
+                },
+                Input = "color",
+                Output = "a1"
             };
 
             Filter colorSource = new()
@@ -57,15 +75,18 @@ namespace PBComparison
                     { "y", "340" },
                 },
                 Input = "a][scaled",
+                //Output = "over"
             };
 
             FilterComplex filter = new()
             {
-                scale, colorSource, drawtext, overlay
+                scale,
+                colorSource,
+                frameCounter,
+                drawtext, overlay,
             };
 
             FFmpegOptions options = new();
-            options.Add("-y");
             options.Add(inputFile, clip, filter, outputFile);
 
             FFmpegRunner runner = new();

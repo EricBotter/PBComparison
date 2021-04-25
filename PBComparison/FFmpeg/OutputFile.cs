@@ -1,4 +1,4 @@
-﻿namespace PBComparison
+﻿namespace PBComparison.FFmpeg
 {
     class OutputFile: IFFmpegOption
     {

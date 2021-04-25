@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PBComparison
+namespace PBComparison.FFmpeg
 {
     class InputFile : IFFmpegOption
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PBComparison
+namespace PBComparison.FFmpeg
 {
     class Filter : IFFmpegOption
     {
@@ -16,11 +16,6 @@ namespace PBComparison
                 + Name + "=" + Arguments.Render()
                 + (Output != null ? "[" + Output + "]" : "")
             ;
-        }
-
-        private string Escape(string arguments)
-        {
-            return arguments;
         }
     }
 }

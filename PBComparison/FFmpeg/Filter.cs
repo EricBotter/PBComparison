@@ -15,10 +15,15 @@ namespace PBComparison.FFmpeg
             return new()
             {
                 "-vf",
-                (Input == null ? "" : "[" + Input + "]")
-                    + Name + "=" + Arguments.Render()
-                    + (Output != null ? "[" + Output + "]" : "")
+                FilterValue()
             };
+        }
+
+        public string FilterValue()
+        {
+            return (Input == null ? "" : "[" + Input + "]")
+                + Name + "=" + Arguments.Render()
+                + (Output != null ? "[" + Output + "]" : "");
         }
     }
 }

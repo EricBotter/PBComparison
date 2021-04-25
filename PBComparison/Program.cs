@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PBComparison.FFmpeg;
+using System;
+using System.Collections.Generic;
 
 namespace PBComparison
 {
@@ -6,7 +8,13 @@ namespace PBComparison
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Clip clip = new() { Begin = "1", Duration = "1" };
+
+            FFmpegOptions options = new(new List<IFFmpegOptionable> { clip });
+
+            FFmpegRunner runner = new();
+
+            runner.Run(options);
         }
     }
 }

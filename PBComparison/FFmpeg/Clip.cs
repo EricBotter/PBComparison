@@ -8,12 +8,12 @@ namespace PBComparison.FFmpeg
 {
     class Clip : IFFmpegOption
     {
-        public string Begin { get; init; }
-        public string Duration { get; init; }
+        public Timestamp Begin { get; init; }
+        public Timestamp Duration { get; init; }
 
         public List<string> ToFFmpegOption()
         {
-            return new() { "-ss", Begin, "-t", Duration };
+            return new() { "-ss", Begin.ToString(), "-t", Duration.ToString() };
         }
     }
 }

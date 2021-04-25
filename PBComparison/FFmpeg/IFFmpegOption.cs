@@ -8,6 +8,6 @@ namespace PBComparison.FFmpeg
 {
     interface IFFmpegOption
     {
-        string ToFFmpegOption();
+        List<string> ToFFmpegOption();
     }
 }

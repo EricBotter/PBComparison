@@ -12,22 +12,28 @@ namespace PBComparison.FFmpeg
     {
         public void Run(FFmpegOptions options)
         {
-            Process process = new()
+            ProcessStartInfo processStartInfo = new()
             {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "ffmpeg.exe",
-                    Arguments = options.Render(),
-                    UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    CreateNoWindow = true,
-                }
+                FileName = "ffmpeg.exe",
+                UseShellExecute = false,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true,
             };
 
-            Console.WriteLine("ffmpeg.exe " + options.Render());
+            foreach (var option in options.Render())
+            {
+                processStartInfo.ArgumentList.Add(option);
+            }
+
+            Process process = new()
+            {
+                StartInfo = processStartInfo
+            };
+
+            Console.WriteLine("ffmpeg.exe " + string.Join(' ', options.Render()));
 
             process.Start();
 
@@ -42,7 +48,7 @@ namespace PBComparison.FFmpeg
 
             Console.WriteLine(process.StandardOutput.ReadToEnd()); // should be empty
 
-            process.WaitForExit();
+            process.WaitForExit(); // kinda useless
             process.Close();
         }
     }

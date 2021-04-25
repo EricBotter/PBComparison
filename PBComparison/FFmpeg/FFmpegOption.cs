@@ -16,9 +16,9 @@ namespace PBComparison.FFmpeg
             Content = content;
         }
 
-        public string ToFFmpegOption()
+        public List<string> ToFFmpegOption()
         {
-            return Content;
+            return new() { Content };
         }
     }
 }

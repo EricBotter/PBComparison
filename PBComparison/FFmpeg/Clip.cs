@@ -11,9 +11,9 @@ namespace PBComparison.FFmpeg
         public string Begin { get; init; }
         public string Duration { get; init; }
 
-        public string ToFFmpegOption()
+        public List<string> ToFFmpegOption()
         {
-            return "-ss " + Begin + " -t " + Duration;
+            return new() { "-ss", Begin, "-t", Duration };
         }
     }
 }

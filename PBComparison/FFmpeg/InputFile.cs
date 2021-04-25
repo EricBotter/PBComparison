@@ -10,6 +10,6 @@ namespace PBComparison.FFmpeg
     {
         public string Filename { get; init; }
 
-        public string ToFFmpegOption() => "-i " + Filename;
+        public List<string> ToFFmpegOption() => new() { "-i", Filename };
     }
 }

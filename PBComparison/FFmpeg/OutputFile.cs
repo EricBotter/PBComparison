@@ -1,9 +1,11 @@
-﻿namespace PBComparison.FFmpeg
+﻿using System.Collections.Generic;
+
+namespace PBComparison.FFmpeg
 {
     class OutputFile: IFFmpegOption
     {
         public string Filename { get; init; }
 
-        public string ToFFmpegOption() => Filename;
+        public List<string> ToFFmpegOption() => new() { Filename };
     }
 }

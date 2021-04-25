@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PBComparison.FFmpeg
 {
@@ -26,9 +27,9 @@ namespace PBComparison.FFmpeg
             Options.Add(new FFmpegOption(option));
         }
 
-        public string Render()
+        public List<string> Render()
         {
-            return string.Join(' ', Options.ConvertAll(option => option.ToFFmpegOption()));
+            return Options.SelectMany(option => option.ToFFmpegOption()).ToList();
         }
     }
 }

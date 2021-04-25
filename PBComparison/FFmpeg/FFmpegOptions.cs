@@ -13,13 +13,7 @@ namespace PBComparison.FFmpeg
 
         public string Render()
         {
-            string output = "";
-            foreach (var option in Options)
-            {
-                output += option.ToFFmpegOption();
-            }
-            return output;
+            return string.Join(' ', Options.ConvertAll(option => option.ToFFmpegOption()));
         }
-
     }
 }
